@@ -82,7 +82,6 @@ class Main extends Sprite
 
 		#if !web framerateSprite = new Framerate(); #end
 
-		funkin.backend.system.framerate.Framerate.fontName = Paths.getFontName(Paths.font("DTM-Mono.ttf"));
 		addChild(game = new FunkinGame(gameWidth, gameHeight, MainState, Options.framerate, Options.framerate, skipSplash, startFullscreen));
 
 		#if android FlxG.android.preventDefaultKeys = [BACK]; #end

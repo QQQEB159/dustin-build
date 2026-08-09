@@ -21,7 +21,7 @@ class Framerate extends Sprite {
 	public static var codenameBuildField:CodenameBuildField;
 	#end
 
-	public static var fontName:String = null;
+	public static var fontName = openfl.utils.Assets.getFont("assets/fonts/DTM-Mono.ttf").fontName;
 
 	/**
 	 * 0: FPS INVISIBLE
