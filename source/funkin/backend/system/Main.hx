@@ -11,6 +11,7 @@ import flixel.math.FlxRect;
 import flixel.system.ui.FlxSoundTray;
 import funkin.backend.assets.AssetsLibraryList;
 import funkin.backend.assets.ModsFolder;
+import funkin.backend.system.framerate.Framerate;
 import funkin.backend.assets.AssetSource;
 import funkin.backend.system.framerate.SystemInfo;
 import funkin.backend.system.modules.*;
@@ -20,6 +21,7 @@ import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.text.TextFormat;
 import openfl.utils.AssetLibrary;
+import lime.system.System as LimeSystem;
 
 #if ALLOW_MULTITHREADING
 import sys.thread.Thread;

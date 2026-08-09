@@ -648,6 +648,8 @@ class PlayState extends MusicBeatState
 
 	@:dox(hide) override public function create()
 	{
+		#if mobile lime.system.System.allowScreenTimeout = false; #end
+		
 		Note.__customNoteTypeExists = [];
 
 		// SCRIPTING & DATA INITIALIZATION
@@ -1074,6 +1076,7 @@ class PlayState extends MusicBeatState
 
 	public override function destroy() {
 		scripts.call("destroy");
+		#if mobile lime.system.System.allowScreenTimeout = Options.screenTimeOut; #end
 		for(g in __cachedGraphics)
 			g.useCount--;
 		@:privateAccess {
@@ -1166,6 +1169,8 @@ class PlayState extends MusicBeatState
 	override function openSubState(SubState:FlxSubState)
 	{
 		var event = gameAndCharsEvent("onSubstateOpen", EventManager.get(StateEvent).recycle(SubState));
+		
+		#if mobile lime.system.System.allowScreenTimeout = Options.screenTimeOut; #end
 
 		if (!postCreated)
 			MusicBeatState.skipTransIn = true;
@@ -1192,6 +1197,7 @@ class PlayState extends MusicBeatState
 	override function closeSubState()
 	{
 		var event = gameAndCharsEvent("onSubstateClose", EventManager.get(StateEvent).recycle(subState));
+		#if mobile lime.system.System.allowScreenTimeout = false; #end
 		if (event.cancelled) return;
 
 		if (paused)
