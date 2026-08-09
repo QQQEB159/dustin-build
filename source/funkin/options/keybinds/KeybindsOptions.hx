@@ -213,6 +213,7 @@ class KeybindsOptions extends MusicBeatSubstate {
 		addTouchPadCamera();
 		#if TOUCH_CONTROLS 
 		touchPad.buttonB.y = 2;
+		#end
 		FlxG.sound.volumeUpKeys = [];
 		FlxG.sound.volumeDownKeys = [];
 		FlxG.sound.muteKeys = [];
