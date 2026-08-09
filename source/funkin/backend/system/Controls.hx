@@ -394,9 +394,6 @@ class Controls extends FlxActionSet
 		add(_switchMod);
 		add(_switchModHold);
 		add(_switchModR);
-		add(_fpsCounter);
-		add(_fpsCounterHold);
-		add(_fpsCounterR);
 
 		add(_devAccess);
 		add(_devAccessHold);
