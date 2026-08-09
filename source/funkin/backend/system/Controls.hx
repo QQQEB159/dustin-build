@@ -61,9 +61,6 @@ enum abstract Action(String) to String from String {
 	var SWITCHMOD = "switchmod";
 	var SWITCHMOD_HOLD = "switchmod-press";
 	var SWITCHMOD_R = "switchmod-release";
-	var FPS_COUNTER = "fps-counter";
-	var FPS_COUNTER_HOLD = "fps-counter-press";
-	var FPS_COUNTER_R = "fps-counter-release";
 
 	var DEV_ACCESS = "dev-access";
 	var DEV_ACCESS_HOLD = "dev-access-press";
@@ -104,7 +101,6 @@ enum Control
 	CHANGE_MODE;
 	//CHEAT;
 	SWITCHMOD;
-	FPS_COUNTER;
 
 	// Debugs
 	DEV_ACCESS;
@@ -173,9 +169,6 @@ class Controls extends FlxActionSet
 	var _switchMod = new FlxActionDigital(Action.SWITCHMOD);
 	var _switchModHold = new FlxActionDigital(Action.SWITCHMOD_HOLD);
 	var _switchModR = new FlxActionDigital(Action.SWITCHMOD_R);
-	var _fpsCounter = new FlxActionDigital(Action.FPS_COUNTER);
-	var _fpsCounterHold = new FlxActionDigital(Action.FPS_COUNTER_HOLD);
-	var _fpsCounterR = new FlxActionDigital(Action.FPS_COUNTER_R);
 
 	var _devAccess = new FlxActionDigital(Action.DEV_ACCESS);
 	var _devAccessHold = new FlxActionDigital(Action.DEV_ACCESS_HOLD);
@@ -323,15 +316,6 @@ class Controls extends FlxActionSet
 	public var SWITCHMOD_R(get, set):Bool;
 	inline function get_SWITCHMOD_R() return _switchModR.check();
 	inline function set_SWITCHMOD_R(val:Bool) return @:privateAccess _switchModR._checked = val;
-	public var FPS_COUNTER(get, set):Bool;
-	inline function get_FPS_COUNTER() return _fpsCounter.check();
-	inline function set_FPS_COUNTER(val:Bool) return @:privateAccess _fpsCounter._checked = val;
-	public var FPS_COUNTER_HOLD(get, set):Bool;
-	inline function get_FPS_COUNTER_HOLD() return _fpsCounterHold.check();
-	inline function set_FPS_COUNTER_HOLD(val:Bool) return @:privateAccess _fpsCounterHold._checked = val;
-	public var FPS_COUNTER_R(get, set):Bool;
-	inline function get_FPS_COUNTER_R() return _fpsCounterR.check();
-	inline function set_FPS_COUNTER_R(val:Bool) return @:privateAccess _fpsCounterR._checked = val;
 
 	public var DEV_ACCESS(get, set):Bool;
 	inline function get_DEV_ACCESS() return _devAccess.check();
@@ -491,7 +475,6 @@ class Controls extends FlxActionSet
 			case CHANGE_MODE: _changeMode;
 			// case CHEAT: _cheat;
 			case SWITCHMOD: _switchMod;
-			case FPS_COUNTER: _fpsCounter;
 			case DEV_ACCESS: _devAccess;
 			case DEV_CONSOLE: _devConsole;
 			case DEV_RELOAD: _devReload;
@@ -572,10 +555,6 @@ class Controls extends FlxActionSet
 				func(_switchMod, JUST_PRESSED);
 				func(_switchModHold, PRESSED);
 				func(_switchModR, JUST_RELEASED);
-			case FPS_COUNTER:
-				func(_fpsCounter, JUST_PRESSED);
-				func(_fpsCounterHold, PRESSED);
-				func(_fpsCounterR, JUST_RELEASED);
 			case DEV_ACCESS:
 				func(_devAccess, JUST_PRESSED);
 				func(_devAccessHold, PRESSED);
@@ -714,7 +693,6 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, Options.SOLO_PAUSE);
 				inline bindKeys(Control.RESET, Options.SOLO_RESET);
 				inline bindKeys(Control.SWITCHMOD, Options.SOLO_SWITCHMOD);
-				inline bindKeys(Control.FPS_COUNTER, Options.SOLO_FPS_COUNTER);
 				inline bindKeys(Control.DEV_ACCESS, Options.SOLO_DEV_ACCESS);
 				inline bindKeys(Control.DEV_CONSOLE, Options.SOLO_DEV_CONSOLE);
 				inline bindKeys(Control.DEV_RELOAD, Options.SOLO_DEV_RELOAD);
@@ -732,7 +710,6 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, Options.P1_PAUSE);
 				inline bindKeys(Control.RESET, Options.P1_RESET);
 				inline bindKeys(Control.SWITCHMOD, Options.P1_SWITCHMOD);
-				inline bindKeys(Control.FPS_COUNTER, Options.P1_FPS_COUNTER);
 				inline bindKeys(Control.DEV_ACCESS, Options.P1_DEV_ACCESS);
 				inline bindKeys(Control.DEV_CONSOLE, Options.P1_DEV_CONSOLE);
 				inline bindKeys(Control.DEV_RELOAD, Options.P1_DEV_RELOAD);
@@ -750,7 +727,6 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.PAUSE, Options.P2_PAUSE);
 				inline bindKeys(Control.RESET, Options.P2_RESET);
 				inline bindKeys(Control.SWITCHMOD, Options.P2_SWITCHMOD);
-				inline bindKeys(Control.FPS_COUNTER, Options.P2_FPS_COUNTER);
 				inline bindKeys(Control.DEV_ACCESS, Options.P2_DEV_ACCESS);
 				inline bindKeys(Control.DEV_CONSOLE, Options.P2_DEV_CONSOLE);
 				inline bindKeys(Control.DEV_RELOAD, Options.P2_DEV_RELOAD);
