@@ -55,6 +55,9 @@ using StringTools;
  * Various utilities, that have no specific Util class.
 **/
 @:allow(funkin.game.PlayState)
+#if cpp
+@:cppFileCode('#include <thread>')
+#end
 final class CoolUtil
 {
 	/**
@@ -1434,6 +1437,16 @@ final class CoolUtil
 		var fromProperty = CoolUtil.parseProperty(fromTarget, fields);
 
 		return toProperty.setValue(fromProperty.getValue());
+	}
+	
+	#if cpp
+	@:functionCode('
+		return std::thread::hardware_concurrency();
+	')
+	#end
+	public static function getCPUThreadsCount():Int
+	{
+		return 1;
 	}
 }
 

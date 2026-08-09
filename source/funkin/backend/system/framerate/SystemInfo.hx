@@ -1,6 +1,10 @@
 package funkin.backend.system.framerate;
 
 import funkin.backend.system.Logs;
+#if android
+import android.os.Build;
+import android.os.Build.VERSION;
+#end
 import funkin.backend.utils.MemoryUtil;
 import funkin.backend.utils.native.HiddenProcess;
 #if cpp
@@ -82,7 +86,7 @@ class SystemInfo extends FramerateCategory {
 		try {
 			#if windows
 			cpuName = RegistryUtil.get(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", "ProcessorNameString");
-			#elseif mac
+			#elseif (mac || ios)
 			var process = new HiddenProcess("sysctl -a | grep brand_string"); // Somehow this isn't able to use the args but it still works
 			if (process.exitCode() != 0) throw 'Could not fetch CPU information';
 
@@ -97,6 +101,8 @@ class SystemInfo extends FramerateCategory {
 					break;
 				}
 			}
+			#elseif android
+			cpuName = (VERSION.SDK_INT >= VERSION_CODES.S) ? Build.SOC_MODEL : Build.HARDWARE;
 			#end
 		} catch (e) {
 			Logs.error('Unable to grab CPU Name: $e');
@@ -138,7 +144,7 @@ class SystemInfo extends FramerateCategory {
 	}
 
 	static function formatSysInfo() {
-		__formattedSysText = "";
+		__formattedSysText = #if android 'Device: ${Build.BRAND.charAt(0).toUpperCase() + Build.BRAND.substring(1)} ${Build.MODEL} (${Build.BOARD})\n' #else "" #end;
 		if (osInfo != "Unknown") __formattedSysText += 'System: $osInfo';
 		if (cpuName != "Unknown") __formattedSysText += '\nCPU: $cpuName ${openfl.system.Capabilities.cpuArchitecture} ${(openfl.system.Capabilities.supports64BitProcesses ? '64-Bit' : '32-Bit')}';
 		if (gpuName != cpuName || vRAM != "Unknown") {

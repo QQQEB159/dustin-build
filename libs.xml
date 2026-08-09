@@ -5,7 +5,7 @@
 
 		<!-- OpenFL & Lime (Required for Flixel) -->
 		<git name="openfl" url="https://github.com/CodenameCrew/cne-openfl" ref="0eaf6da141f7311c227e692bab11d674f03bc388" />
-		<lib name="lime" version="8.1.2" />
+		<git name="lime" url="https://github.com/QQQEB159/lime-8.1.2" />
 		<!-- <git name="lime" url="https://github.com/CodenameCrew/cne-lime" />  disabled for now until fixed -->
 
 		<!-- Flixel -->
@@ -31,24 +31,7 @@
 		<lib global="true" name="hxp" /> <lib name="hxp" />
 		<lib global="true" name="format" /> <lib name="format" />
 
-		<git name="hxcpp" url="https://github.com/CodenameCrew/cne-hxcpp" ref="9b5b91dc027a71b31c4cf5cff04127ca41431ce4" />
+		<git name="hxcpp" url="https://github.com/ShadowEngineTeam/hxcpp" />
 	</if>
-
-	<!-- Hxcpp Building -->
-	<if cond="build-hxcpp || all">
-		<print pretty="true">Rebuilding Hxcpp...</print>
-
-		<!-- Build hxcpp -->
-		<cmd inLib="hxcpp" dir="tools/hxcpp" cmd="haxe compile.hxml" />
-	</if>
-
-	<!-- Lime Building -->
-	<!-- <if cond="build-lime || all">
-		<print pretty="true">Rebuilding Lime...</print>
-
-		<!- - Build lime - ->
-		<cmd inLib="lime" cmd="haxelib run lime rebuild . $PLATFORM -release -clean" />
-		<cmd inLib="lime" dir="tools" cmd="haxe tools.hxml" />
-	</if> -->
 
 </libraries>

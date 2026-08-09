@@ -50,6 +50,10 @@ class PlayState extends MusicBeatState
 	 */
 	public static var SONG:ChartData;
 	/**
+	 * qqqeb want to kill you.
+	 */
+	public static var qqqeb:Bool = false;
+	/**
 	 * Whenever the song is being played in Story Mode.
 	 */
 	public static var isStoryMode:Bool = false;
@@ -876,6 +880,15 @@ class PlayState extends MusicBeatState
 
 		startingSong = true;
 
+		#if TOUCH_CONTROLS
+		addHitbox();
+		#if !android
+		addTouchPad('NONE', 'P');
+		addTouchPadCamera();
+		#end
+		hitbox.visible = false;
+		#end
+		
 		super.create();
 
 		for(s in introSprites)
@@ -979,7 +992,7 @@ class PlayState extends MusicBeatState
 			if (gameAndCharsEvent("onStartCountdown", new CancellableEvent()).cancelled) return;
 		}
 
-		startedCountdown = true;
+		startedCountdown = #if TOUCH_CONTROLS hitbox.visible = #end true;
 		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * introLength - Conductor.songOffset;
 
@@ -1076,6 +1089,8 @@ class PlayState extends MusicBeatState
 		SaveWarning.reset();
 
 		instance = null;
+		
+		qqqeb = false;
 
 		Note.__customNoteTypeExists = [];
 	}
@@ -1407,7 +1422,7 @@ class PlayState extends MusicBeatState
 		while(events.length > 0 && events.last().time <= Conductor.songPosition)
 			executeEvent(events.pop());
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if ((#if android FlxG.android.justReleased.BACK || #end controls.PAUSE) && startedCountdown && canPause)
 			pauseGame();
 
 		if (generatedMusic)
@@ -1698,6 +1713,9 @@ class PlayState extends MusicBeatState
 		if (gameAndCharsEvent("onSongEnd", new CancellableEvent()).cancelled) return;
 		endingSong = true;
 		canPause = false;
+		#if TOUCH_CONTROLS
+		hitbox.visible = false;
+		#end
 
 		for (strumLine in strumLines.members) strumLine.vocals.stop();
 		inst.stop();
@@ -1731,6 +1749,9 @@ class PlayState extends MusicBeatState
 	 * Immediately switches to the next song, or goes back to the Story/Freeplay menu.
 	 */
 	public function nextSong() {
+		#if TOUCH_CONTROLS
+		hitbox.visible = false;
+		#end
 		if (isStoryMode) {
 			campaignScore += songScore;
 			campaignMisses += misses;
