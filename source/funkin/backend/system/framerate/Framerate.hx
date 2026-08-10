@@ -21,7 +21,7 @@ class Framerate extends Sprite {
 	public static var codenameBuildField:CodenameBuildField;
 	#end
 
-	public static var fontName = openfl.utils.Assets.getFont("assets/fonts/DTM-Mono.ttf").fontName;
+	public static var fontName:String = null;
 
 	/**
 	 * 0: FPS INVISIBLE
@@ -52,7 +52,7 @@ class Framerate extends Sprite {
 		super();
 		if (instance != null) throw "Cannot create another instance";
 		instance = this;
-		textFormat = new TextFormat(fontName, 12, -1);
+		textFormat = new TextFormat(openfl.utils.Assets.getFont("assets/fonts/DTM-Mono.ttf").fontName, 12, -1);
 
 		isLoaded = true;
 
