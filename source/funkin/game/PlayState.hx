@@ -2218,6 +2218,30 @@ class PlayState extends MusicBeatState
 		SONG = Chart.parse(_name, _difficulty, _variation);
 		fromMods = SONG.fromMods;
 	}
+	
+	/**
+	 * 设置四个按键的颜色.
+	**/
+	public function setMobileControlsColor(a:Int, b:Int, c:Int, d:Int)
+	{
+	    if (mobileControls.instance != null)
+	    {
+    	    mobileControls.buttonLeft.color = a;
+            mobileControls.buttonDown.color = b;
+            mobileControls.buttonUp.color = c;
+            mobileControls.buttonRight.color = d;
+        }
+	}
+	
+	/**
+	 * 是否启用空格键.
+	**/
+	public function enableSpaceBar(?fnfpwp:Bool = false)
+	{
+	    qqqeb = fnfpwp;
+	    removeMobileControls();
+	    addMobileControls();
+	}
 }
 
 final class ComboRating {
@@ -2265,29 +2289,5 @@ class CamPosData {
 		if(pos == null) return;
 		pos.put();
 		pos = null;
-	}
-	
-	/**
-	 * 设置四个按键的颜色.
-	**/
-	public function setMobileControlsColor(a:Int, b:Int, c:Int, d:Int)
-	{
-	    if (mobileControls.instance != null)
-	    {
-    	    mobileControls.buttonLeft.color = a;
-            mobileControls.buttonDown.color = b;
-            mobileControls.buttonUp.color = c;
-            mobileControls.buttonRight.color = d;
-        }
-	}
-	
-	/**
-	 * 是否启用空格键.
-	**/
-	public function enableSpaceBar(?fnfpwp:Bool = false)
-	{
-	    qqqeb = fnfpwp;
-	    removeMobileControls();
-	    addMobileControls();
 	}
 }

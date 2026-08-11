@@ -263,7 +263,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 				changeControls();
 			case 5:
 				reset.visible = true;
-				changeControls(0, true);
+				changeControls(0);
 				control.touchPad.forEachAlive((button:TouchButton) ->
 				{
 					var ignore = ['G', 'S'];
