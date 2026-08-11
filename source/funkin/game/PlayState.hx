@@ -2241,6 +2241,7 @@ class PlayState extends MusicBeatState
 	    qqqeb = fnfpwp;
 	    removeMobileControls();
 	    addMobileControls();
+	    mobileControls.instance.visible = true;
 	}
 }
 
