@@ -996,6 +996,7 @@ class PlayState extends MusicBeatState
 
 		#if TOUCH_CONTROLS
 		if (mobileControls.instance != null) mobileControls.instance.visible = true;
+		#end
 		startedCountdown = true;
 		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * introLength - Conductor.songOffset;
