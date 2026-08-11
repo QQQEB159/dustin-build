@@ -21,6 +21,8 @@ class TouchPad extends MobileInputManager implements IMobileControls
 	public var buttonUp2:TouchButton = new TouchButton(0, 0, [MobileInputID.UP2]);
 	public var buttonRight2:TouchButton = new TouchButton(0, 0, [MobileInputID.RIGHT2]);
 	public var buttonDown2:TouchButton = new TouchButton(0, 0, [MobileInputID.DOWN2]);
+	public var buttonExtra:TouchButton = new TouchButton(0, 0, [MobileInputID.EXTRA_1]);
+	public var buttonExtra2:TouchButton = new TouchButton(0, 0, [MobileInputID.EXTRA_2]);
 
 	public var instance:MobileInputManager;
 	public var curDPadMode(default, null):String = "NONE";
@@ -66,6 +68,10 @@ class TouchPad extends MobileInputManager implements IMobileControls
 
 		curDPadMode = DPad;
 		curActionMode = Action;
+		
+		if (funkin.game.PlayState.qqqeb)
+			if (MobileData.mode != 3) add(buttonExtra = createButton((DPad == 'LEFT_FULL') ? 1149 : 0, FlxG.height - 137, 's', 0xFF0066FF));
+		
 		alpha = Options.touchPadAlpha;
 		scrollFactor.set();
 		updateTrackedButtons();
