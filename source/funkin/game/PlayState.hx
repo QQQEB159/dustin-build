@@ -2286,7 +2286,7 @@ class CamPosData {
 	public function enableSpaceBar(?fnfpwp:Bool = false)
 	{
 	    qqqeb = fnfpwp;
-	    removeMobileControls():
+	    removeMobileControls();
 	    addMobileControls();
 	}
 }
