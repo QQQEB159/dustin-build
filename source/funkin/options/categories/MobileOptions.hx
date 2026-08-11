@@ -28,7 +28,7 @@ class MobileOptions extends TreeMenuScreen
         super('optionsTree.mobile-name', 'optionsTree.mobile-name', 'MobileOptions.', ['LEFT_FULL', 'A_B']);
 
 		#if TOUCH_CONTROLS
-		add(new ArrayOption(getNameID('extraHints'), getDescID('extraHints'), ['NONE', 'SINGLE', 'DOUBLE'], ["None", "Single", "Double"], 'extraHints'));
+		//add(new ArrayOption(getNameID('extraHints'), getDescID('extraHints'), ['NONE', 'SINGLE', 'DOUBLE'], ["None", "Single", "Double"], 'extraHints'));
 		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0.0, 1.0, 0.1, "hitboxAlpha"));
 		add(new Checkbox(getNameID('oldPadTexture'), getDescID('oldPadTexture'), "oldPadTexture", () ->
 		{
@@ -62,12 +62,12 @@ class MobileOptions extends TreeMenuScreen
 		}));
 		#end
 		#if android
-		add(new ArrayOption(
+		/*add(new ArrayOption(
 			"Storage Type",
 			"Choose which folder Codename Engine should use! (CHANGING THIS MAKES DELETE YOUR OLD FOLDER!!)",
 			typeVars,
 			typeNames,
-			'storageType'));
+			'storageType'));*/
 		#end
 	}
 

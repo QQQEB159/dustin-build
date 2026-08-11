@@ -16,6 +16,8 @@ import funkin.backend.utils.NativeAPI;
 import funkin.options.Options;
 import mobile.objects.TouchButton;
 import mobile.objects.TouchPad;
+import mobile.objects.MobileControls;
+import mobile.objects.IMobileControls;
 import mobile.funkin.backend.utils.MobileData;
 import mobile.funkin.backend.system.input.MobileInputID;
 import mobile.funkin.backend.system.input.MobileInputManager;

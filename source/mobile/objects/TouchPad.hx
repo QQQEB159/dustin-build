@@ -15,7 +15,7 @@ import openfl.utils.Assets;
  */
 @:access(mobile.objects.TouchButton)
 @:build(mobile.funkin.backend.system.macros.TouchPadMacro.build())
-class TouchPad extends MobileInputManager
+class TouchPad extends MobileInputManager implements IMobileControls
 {
 	public var buttonLeft2:TouchButton = new TouchButton(0, 0, [MobileInputID.LEFT2]);
 	public var buttonUp2:TouchButton = new TouchButton(0, 0, [MobileInputID.UP2]);

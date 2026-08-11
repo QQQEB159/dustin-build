@@ -5,6 +5,7 @@ import flixel.util.typeLimit.OneOfThree;
 import funkin.editors.ui.UIState;
 import funkin.options.categories.*;
 import funkin.options.type.*;
+import mobile.funkin.backend.system.MobileControlSelectSubState;
 
 typedef OptionCategory = {
 	var name:String;
@@ -113,11 +114,22 @@ class OptionsMenu extends TreeMenu {
 		}
 		
 		#if TOUCH_CONTROLS
-		addTouchPad('UP_DOWN', 'A_B');
+		addTouchPad('UP_DOWN', 'A_B_C');
 		addTouchPadCamera();
 		#end
 	}
 
+	public override function update(elapsed:Float) {
+		super.update(elapsed);
+		
+		if (MusicBeatState.getState().touchPad.buttonC.justPressed || FlxG.keys.justPressed.CONTROL && controls.touchC)
+		{
+			openSubState(new MobileControlSelectSubState());
+			persistentUpdate = false;
+			persistentDraw = true;
+		}
+	}
+	
 	function checkDebugOption() {
 		var first = tree.first();
 		if (Options.devMode) {
@@ -156,6 +168,7 @@ class OptionsMenu extends TreeMenu {
 	override function exit() {
 		Options.save();
 		Options.applySettings();
+		FlxG.mouse.visible = false;
 		super.exit();
 	}
 

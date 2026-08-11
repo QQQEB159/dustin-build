@@ -19,6 +19,8 @@ import mobile.objects.Hitbox;
 import mobile.objects.TouchPad;
 import flixel.FlxCamera;
 import flixel.util.FlxDestroyUtil;
+import mobile.objects.MobileControls;
+import mobile.objects.IMobileControls;
 #end
 
 /**
@@ -124,8 +126,8 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		
 	#if TOUCH_CONTROLS
 	public var touchPad:TouchPad;
-	public var hitbox:Hitbox;
-	public var hboxCam:FlxCamera;
+	public var mobileControls:IMobileControls;
+	public var mobileControlsCam:FlxCamera;
 	public var tpadCam:FlxCamera;
 	#end
 
@@ -154,33 +156,45 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		#end
 	}
 
-	public function addHitbox(?defaultDrawTarget:Bool = false) {
+	public function addMobileControls(defaultDrawTarget:Bool = false):Void
+	{
 		#if TOUCH_CONTROLS
-		hitbox = new Hitbox(Options.extraHints);
+		switch (MobileData.mode)
+		{
+			case 0: // RIGHT_FULL
+				mobileControls = new TouchPad('RIGHT_FULL', 'NONE');
+			case 1: // LEFT_FULL
+				mobileControls = new TouchPad('LEFT_FULL', 'NONE');
+			case 2: // CUSTOM
+				mobileControls = MobileData.getTouchPadCustom(new TouchPad('RIGHT_FULL', 'NONE'));
+			case 3: // HITBOX
+				mobileControls = new Hitbox();
+		}
 
-		hboxCam = new FlxCamera();
-		hboxCam.bgColor.alpha = 0;
-		FlxG.cameras.add(hboxCam, defaultDrawTarget);
+		mobileControlsCam = new FlxCamera();
+		mobileControlsCam.bgColor.alpha = 0;
+		FlxG.cameras.add(mobileControlsCam, defaultDrawTarget);
 
-		hitbox.cameras = [hboxCam];
-		hitbox.visible = false;
-		add(hitbox);
+		mobileControls.instance.cameras = [mobileControlsCam];
+		mobileControls.instance.visible = false;
+		add(mobileControls.instance);
 		#end
 	}
 
-	public function removeHitbox() {
+	public function removeMobileControls()
+	{
 		#if TOUCH_CONTROLS
-		if (hitbox != null)
+		if (mobileControls != null)
 		{
-			remove(hitbox);
-			hitbox = FlxDestroyUtil.destroy(hitbox);
-			hitbox = null;
+			remove(mobileControls.instance);
+			mobileControls.instance = FlxDestroyUtil.destroy(mobileControls.instance);
+			mobileControls = null;
 		}
 
-		if(hboxCam != null)
+		if (mobileControlsCam != null)
 		{
-			FlxG.cameras.remove(hboxCam);
-			hboxCam = FlxDestroyUtil.destroy(hboxCam);
+			FlxG.cameras.remove(mobileControlsCam);
+			mobileControlsCam = FlxDestroyUtil.destroy(mobileControlsCam);
 		}
 		#end
 	}
@@ -384,7 +398,7 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 	public override function destroy() {
 		#if TOUCH_CONTROLS
 		removeTouchPad();
-		removeHitbox();
+		removeMobileControls();
 		#end
 		super.destroy();
 		graphicCache.destroy();

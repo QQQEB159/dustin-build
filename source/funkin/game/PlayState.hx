@@ -883,12 +883,12 @@ class PlayState extends MusicBeatState
 		startingSong = true;
 
 		#if TOUCH_CONTROLS
-		addHitbox();
+		addMobileControls();
 		#if !android
 		addTouchPad('NONE', 'P');
 		addTouchPadCamera();
 		#end
-		hitbox.visible = false;
+		mobileControls.instance.visible = false;
 		#end
 		
 		super.create();
@@ -994,7 +994,9 @@ class PlayState extends MusicBeatState
 			if (gameAndCharsEvent("onStartCountdown", new CancellableEvent()).cancelled) return;
 		}
 
-		startedCountdown = #if TOUCH_CONTROLS hitbox.visible = #end true;
+		#if TOUCH_CONTROLS
+		if (mobileControls.instance != null) mobileControls.instance.visible = true;
+		startedCountdown = true;
 		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * introLength - Conductor.songOffset;
 
@@ -1720,7 +1722,7 @@ class PlayState extends MusicBeatState
 		endingSong = true;
 		canPause = false;
 		#if TOUCH_CONTROLS
-		hitbox.visible = false;
+		if (mobileControls.instance != null) mobileControls.instance.visible = false;
 		#end
 
 		for (strumLine in strumLines.members) strumLine.vocals.stop();
@@ -1756,7 +1758,7 @@ class PlayState extends MusicBeatState
 	 */
 	public function nextSong() {
 		#if TOUCH_CONTROLS
-		hitbox.visible = false;
+		if (mobileControls.instance != null) mobileControls.instance.visible = false;
 		#end
 		if (isStoryMode) {
 			campaignScore += songScore;
@@ -2262,5 +2264,29 @@ class CamPosData {
 		if(pos == null) return;
 		pos.put();
 		pos = null;
+	}
+	
+	/**
+	 * 设置四个按键的颜色.
+	**/
+	public function setMobileControlsColor(a:Int, b:Int, c:Int, d:Int)
+	{
+	    if (mobileControls.instance != null)
+	    {
+    	    mobileControls.buttonLeft.color = a;
+            mobileControls.buttonDown.color = b;
+            mobileControls.buttonUp.color = c;
+            mobileControls.buttonRight.color = d;
+        }
+	}
+	
+	/**
+	 * 是否启用空格键.
+	**/
+	public function enableSpaceBar(?fnfpwp:Bool = false)
+	{
+	    qqqeb = fnfpwp;
+	    removeMobileControls():
+	    addMobileControls();
 	}
 }
