@@ -24,6 +24,7 @@ class MobileData
 	{
 		save = new FlxSave();
 		save.bind('MobileControls', flixel.FlxG.stage.application.meta.get('company'));
+		save.load();
 
 		setDefaultMap('assets/mobile/DPadModes', dpadModes);
 		setDefaultMap('assets/mobile/ActionModes', actionModes);
