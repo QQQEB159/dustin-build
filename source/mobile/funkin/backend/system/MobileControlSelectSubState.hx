@@ -202,7 +202,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 					{
 						if (!bindButton.bounds.immovable)
 						{
-							if (bindButton.bounds.x > button.bounds.x)
+							/*if (bindButton.bounds.x > button.bounds.x)
 								bindButton.bounds.x = button.bounds.x + button.bounds.width;
 							else
 								bindButton.bounds.x = button.bounds.x - button.bounds.width;
@@ -210,7 +210,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 							if (bindButton.bounds.y > button.bounds.y)
 								bindButton.bounds.y = button.bounds.y + button.bounds.height;
 							else if (bindButton.bounds.y != button.bounds.y)
-								bindButton.bounds.y = button.bounds.y - button.bounds.height;
+								bindButton.bounds.y = button.bounds.y - button.bounds.height;.*/
 						}
 						return true;
 					});
