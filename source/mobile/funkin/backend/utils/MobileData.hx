@@ -6,6 +6,7 @@ import haxe.Json;
 import haxe.io.Path;
 import openfl.utils.Assets;
 import flixel.util.FlxSave;
+import openfl.net.SharedObject;
 
 /**
  * ...
@@ -18,12 +19,11 @@ class MobileData
 
 	public static var mode(get, set):Int;
 	public static var forcedMode:Null<Int>;
-	public static var save:FlxSave;
+	public static var save:SharedObject;
 
 	public static function init()
 	{
-		save = new FlxSave();
-		save.bind('MobileControls', flixel.FlxG.stage.application.meta.get('company'));
+		save = SharedObject.getLocal('MobileControls', flixel.FlxG.stage.application.meta.get('company'));
 
 		setDefaultMap('assets/mobile/DPadModes', dpadModes);
 		setDefaultMap('assets/mobile/ActionModes', actionModes);
