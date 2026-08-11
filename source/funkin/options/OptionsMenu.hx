@@ -127,7 +127,14 @@ class OptionsMenu extends TreeMenu {
 			openSubState(new MobileControlSelectSubState());
 			persistentUpdate = false;
 			persistentDraw = true;
+			touchPad.visible = false;
 		}
+	}
+	
+	public override function closeSubState() 
+	{
+		touchPad.visible = true;
+		super.closeSubState();
 	}
 	
 	function checkDebugOption() {
