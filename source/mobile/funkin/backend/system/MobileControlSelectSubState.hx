@@ -11,6 +11,7 @@ import flixel.ui.FlxButton as UIButton;
 import funkin.backend.MusicBeatSubstate;
 import flixel.text.FlxText;
 import funkin.game.PlayState;
+import mobile.objects.Alphabet;
 
 class MobileControlSelectSubState extends MusicBeatSubstate
 {
