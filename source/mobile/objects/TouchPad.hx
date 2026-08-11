@@ -80,23 +80,23 @@ class TouchPad extends MobileInputManager implements IMobileControls
 	}
 
 	public function setExtrasDefaultPos()
-	{
-		var int:Int = 0;
-
-		if (MobileData.save.data.extraData == null)
-			MobileData.save.data.extraData = new Array();
-
-		for (button in Reflect.fields(this))
-		{
-			var field = Reflect.field(this, button);
-			if (button.toLowerCase().contains('extra') && Std.isOfType(field, TouchButton))
-			{
-				MobileData.save.data.extraData[int] = FlxPoint.get(field.x, field.y);
-				++int;
-			}
-		}
-		MobileData.save.flush();
-	}
+    {
+        var int:Int = 0;
+    
+        if (MobileData.save.data.extraData == null)
+            MobileData.save.data.extraData = new Array();
+    
+        for (button in Reflect.fields(this))
+        {
+            var field = Reflect.field(this, button);
+            if (button.toLowerCase().contains('extra') && Std.isOfType(field, TouchButton))
+            {
+                MobileData.save.data.extraData[int] = {x: field.x, y: field.y};
+                ++int;
+            }
+        }
+        MobileData.save.flush();
+    }
 	
 	override public function destroy()
 	{

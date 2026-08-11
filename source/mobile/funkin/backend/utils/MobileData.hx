@@ -39,45 +39,45 @@ class MobileData
 	}
 
 	public static function setTouchPadCustom(touchPad:TouchPad):Void
-	{
-		if (save.data.buttons == null)
-		{
-			save.data.buttons = new Array();
-			for (buttons in touchPad)
-				save.data.buttons.push(FlxPoint.get(buttons.x, buttons.y));
-		}
-		else
-		{
-			var tempCount:Int = 0;
-			for (buttons in touchPad)
-			{
-				save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
-				tempCount++;
-			}
-		}
+    {
+        if (save.data.buttons == null)
+        {
+            save.data.buttons = new Array();
+            for (buttons in touchPad)
+                save.data.buttons.push({x: buttons.x, y: buttons.y});
+        }
+        else
+        {
+            var tempCount:Int = 0;
+            for (buttons in touchPad)
+            {
+                save.data.buttons[tempCount] = {x: buttons.x, y: buttons.y};
+                tempCount++;
+            }
+        }
+    
+        save.flush();
+    }
 
-		save.flush();
-	}
-
-	public static function getTouchPadCustom(touchPad:TouchPad):TouchPad
-	{
-		var tempCount:Int = 0;
-
-		if (save.data.buttons == null)
-			return touchPad;
-
-		for (buttons in touchPad)
-		{
-			if (save.data.buttons[tempCount] != null)
-			{
-				buttons.x = save.data.buttons[tempCount].x;
-				buttons.y = save.data.buttons[tempCount].y;
-			}
-			tempCount++;
-		}
-
-		return touchPad;
-	}
+    public static function getTouchPadCustom(touchPad:TouchPad):TouchPad
+    {
+        var tempCount:Int = 0;
+    
+        if (save.data.buttons == null)
+            return touchPad;
+    
+        for (buttons in touchPad)
+        {
+            if (save.data.buttons[tempCount] != null)
+            {
+                buttons.x = save.data.buttons[tempCount].x;
+                buttons.y = save.data.buttons[tempCount].y;
+            }
+            tempCount++;
+        }
+    
+        return touchPad;
+    }
 	
 	public static function clearTouchPadData()
 	{
