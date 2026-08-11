@@ -45,7 +45,7 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 				touchPad = MobileData.getTouchPadCustom(new TouchPad('RIGHT_FULL', 'NONE'));
 				add(touchPad);
 			case 3:
-				hitbox = new Hitbox(extraAction);
+				hitbox = new Hitbox();
 				add(hitbox);
 		}
 	}
