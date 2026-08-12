@@ -779,6 +779,7 @@ class PlayState extends MusicBeatState
 			}
 
 			var strOffset:Float = strumLine.strumLinePos != null ? strumLine.strumLinePos : (strumLine.type == 1 ? 0.75 : 0.25);
+			if (Options.middleScroll) strOffset = 0.5;
 			var strScale:Float = strumLine.strumScale != null ? strumLine.strumScale : 1;
 			var strSpacing:Float = strumLine.strumSpacing == null ? 1 : strumLine.strumSpacing;
 			var keyCount:Int = strumLine.keyCount == null ? 4 : strumLine.keyCount;
@@ -802,6 +803,8 @@ class PlayState extends MusicBeatState
 		}
 
 		add(strumLines);
+		
+		if (Options.middleScroll) cpuStrums.visible = false;
 
 		splashHandler = new SplashHandler();
 		add(splashHandler);

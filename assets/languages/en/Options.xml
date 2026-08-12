@@ -126,6 +126,9 @@
 	<group name="GameplayOptions" prefix="GameplayOptions.">
 		<str id="downscroll-name">Downscroll</str>
 		<str id="downscroll-desc">If checked, notes will go from up to down instead of down to up, as if they're falling.</str>
+		
+		<str id="middleScroll-name">MiddleScroll</str>
+		<str id="middleScroll-desc">If checked, your notes will be centered, hiding the opponent's notes.</str>
 
 		<str id="ghostTapping-name">Ghost Tapping</str>
 		<str id="ghostTapping-desc">If unchecked, trying to hit any strum that have no note that can be hit will cause a miss.</str>
