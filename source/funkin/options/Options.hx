@@ -59,7 +59,7 @@ class Options
 	 */
 	#if mobile
 	public static var screenTimeOut:Bool = false;
-	#if android public static var storageType:String = "EXTERNAL"; #end
+	#if android public static var storageType:String = "EXTERNAL_DATA"; #end
 	#end
 	public static var extraHints:String = "NONE";
 	public static var hitboxPos:Bool = true;
