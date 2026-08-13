@@ -2,18 +2,14 @@ package funkin.options.type;
 
 class NumOption extends TextOption {
     public var changedCallback:Float->Void;
-
     public var min:Float;
     public var max:Float;
     public var step:Float;
-
     public var currentValue:Float;
-
     public var parent:Dynamic;
     public var optionName:String;
 
     var __number:Alphabet;
-
     var currentIndex:Int = 0;
     var decimals:Int = 0;
 
@@ -39,7 +35,6 @@ class NumOption extends TextOption {
         }
 
         savedValue = Math.min(Math.max(savedValue, min), max);
-
         currentIndex = Math.round((savedValue - min) / step);
         currentValue = roundToPrecision(min + currentIndex * step, decimals);
 
@@ -47,9 +42,8 @@ class NumOption extends TextOption {
         super(text, desc);
         add(__number);
 
-        if (Reflect.field(parent, optionName) != null) {
-            Reflect.setField(parent, optionName, currentValue);
-        }
+        Reflect.setField(parent, optionName, currentValue);
+        if (changedCallback != null) changedCallback(currentValue);
     }
 
     override function changeSelection(change:Int):Void {
@@ -62,12 +56,10 @@ class NumOption extends TextOption {
 
         currentIndex = nextIndex;
         currentValue = roundToPrecision(min + currentIndex * step, decimals);
-
         __number.text = ': ${formatValue(currentValue)}';
 
         Reflect.setField(parent, optionName, currentValue);
         if (changedCallback != null) changedCallback(currentValue);
-
         CoolUtil.playMenuSFX(SCROLL);
     }
 
