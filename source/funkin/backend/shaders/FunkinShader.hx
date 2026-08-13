@@ -13,9 +13,6 @@ import openfl.display.ShaderParameterType;
 import openfl.display3D._internal.GLProgram;
 import openfl.display3D._internal.GLShader;
 import openfl.utils._internal.Log;
-#if mobile
-import mobile.shaders.MobileShaderConverter;
-#end
 
 using StringTools;
 @:access(openfl.display3D.Context3D)
@@ -316,25 +313,7 @@ class FunkinShader extends FlxShader implements IHScriptCustomBehaviour {
 			var vertex = prefix + vertexPrefix + glVertexSource;
 			var fragment = prefix + fragmentPrefix + glFragmentSource;
 
-			#if mobile
-			// FunkinShader owns its complete GL program path, so OpenFL's base
-			// Shader converter never sees these sources. Convert the final,
-			// pragma-expanded program here before it reaches the mobile driver.
-			var glVersion = MobileShaderConverter.configureFromGL(gl);
-			// The user-facing converter toggle may disable compatibility work for
-			// ordinary OpenFL shaders, but FunkinShader always prepends desktop GLSL
-			// (`#version 120`). That source is never legal on OpenGL ES as-is, so the
-			// CNE-owned program path must always perform its platform conversion.
-			var preparedSources = MobileShaderConverter.prepareProgram(vertex, fragment, glVersion, true);
-			for (diagnostic in preparedSources.diagnostics)
-				Log.warn('NovaFlare GLSL ES conversion [${diagnostic.stage}:${diagnostic.line}]: ${diagnostic.message}', null);
-			vertex = preparedSources.vertex;
-			fragment = preparedSources.fragment;
-			var id = preparedSources.cacheKey + '\nvertex:' + vertex.length + '\n' + vertex
-				+ '\nfragment:' + fragment.length + '\n' + fragment;
-			#else
 			var id = vertex + fragment;
-			#end
 
 			if (__context.__programs.exists(id))
 			{
