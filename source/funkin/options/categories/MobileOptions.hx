@@ -73,7 +73,7 @@ class MobileOptions extends TreeMenuScreen
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
-		MusicBeatState.getState().touchPad.alpha = Options.touchPadAlpha;
+		MusicBeatState.getState().touchPad.alpha = (Options.touchPadAlpha / 100);
     }
 	
 	override function close()

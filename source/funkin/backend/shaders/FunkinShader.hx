@@ -349,12 +349,6 @@ class FunkinShader extends FlxShader implements IHScriptCustomBehaviour {
 
 			if (program != null)
 			{
-				#if mobile
-				@:privateAccess {
-					__glTransformRevision = MobileShaderConverter.revision;
-					__glProgramDirty = false;
-				}
-				#end
 				glProgram = program.__glProgram;
 
 				for (input in __inputBitmapData) {
