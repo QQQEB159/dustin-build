@@ -29,15 +29,15 @@ class MobileOptions extends TreeMenuScreen
 
 		#if TOUCH_CONTROLS
 		//add(new ArrayOption(getNameID('extraHints'), getDescID('extraHints'), ['NONE', 'SINGLE', 'DOUBLE'], ["None", "Single", "Double"], 'extraHints'));
-		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0.0, 1.0, 0.1, "hitboxAlpha"));
+		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0, 100, 5, "hitboxAlpha"));
 		add(new Checkbox(getNameID('oldPadTexture'), getDescID('oldPadTexture'), "oldPadTexture", () ->
 		{
 			MusicBeatState.getState().removeTouchPad();
 			MusicBeatState.getState().addTouchPad("LEFT_FULL", "A_B");
 		}));
-		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0.0, 1.0, 0.1, "touchPadAlpha", (alpha:Float) ->
+		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0, 100, 5, "touchPadAlpha", (alpha:Int) ->
 		{
-			MusicBeatState.getState().touchPad.alpha = alpha;
+			MusicBeatState.getState().touchPad.alpha = (alpha / 100);
 			if (funkin.backend.system.Controls.instance.touchC)
 			{
 				FlxG.sound.volumeUpKeys = [];

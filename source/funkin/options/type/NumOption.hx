@@ -38,26 +38,12 @@ class NumOption extends TextOption {
 		add(__number);
 	}
 
-	private function formatValue(value:Float):String {
-		if (step >= 1.0) {
-			return Std.string(Std.int(value));
-		} else if (step >= 0.01) {
-			return Std.string(Math.round(value * 100) / 100);
-		} else if (step >= 0.001) {
-			return Std.string(Math.round(value * 1000) / 1000);
-		} else {
-			return Std.string(Math.round(value * 10000) / 10000);
-		}
-	}
-	
 	override function changeSelection(change:Int):Void {
 		if (locked) return;
-		var next = FlxMath.bound(currentValue + change * step, min, max);
-		if (Math.abs(next - currentValue) < (step * 0.001)) return;
-        currentValue = next;
-		__number.text = ': ${formatValue(currentValue)}';
+		if (currentValue == (currentValue = FlxMath.bound(currentValue + change * step, min, max))) return;
+		__number.text = ': $currentValue';
 
-		if (optionName != null && parent != null) Reflect.setField(parent, optionName, currentValue);
+		Reflect.setField(parent, optionName, currentValue);
 		if (changedCallback != null) changedCallback(currentValue);
 
 		CoolUtil.playMenuSFX(SCROLL);
