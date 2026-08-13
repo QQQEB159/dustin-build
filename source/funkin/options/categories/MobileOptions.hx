@@ -37,7 +37,7 @@ class MobileOptions extends TreeMenuScreen
 		}));
 		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0, 100, 5, "touchPadAlpha", (alpha:Float) ->
 		{
-			MusicBeatState.getState().touchPad.alpha = (alpha / 100);
+			//MusicBeatState.getState().touchPad.alpha = (alpha / 100);
 			if (funkin.backend.system.Controls.instance.touchC)
 			{
 				FlxG.sound.volumeUpKeys = [];
@@ -71,6 +71,11 @@ class MobileOptions extends TreeMenuScreen
 		#end
 	}
 
+	override function update(elapsed:Float) {
+		super.update(elapsed);
+		MusicBeatState.getState().touchPad.alpha = Options.touchPadAlpha;
+    }
+	
 	override function close()
 	{
 		super.close();

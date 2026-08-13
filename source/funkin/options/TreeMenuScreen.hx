@@ -108,18 +108,18 @@ class TreeMenuScreen extends FlxSpriteGroup {
 			for (basic in turboBasics) basic.update(elapsed);
 
 			var change = (upTurboControl.activated ? -1 : 0) + (downTurboControl.activated ? 1 : 0) - FlxG.mouse.wheel, mouseControl = false;
-			if (FlxG.mouse.justPressed && !funkin.backend.system.Controls.instance.touchC) {
+			/*if (FlxG.mouse.justPressed && !funkin.backend.system.Controls.instance.touchC) {
 				for (i in CoolUtil.maxInt(curSelected - 3, 0)...CoolUtil.minInt(curSelected + 4, length))
 					if (i != curSelected && members[i] != null && mouseOverlaps(members[i])) {
 						change = i - curSelected;
 						mouseControl = true;
 						break;
 					}
-			}
+			}*/
 			changeSelection(change);
 
 			if (length > 0 && curOption != null) {
-				if (controls.ACCEPT || (!mouseControl && FlxG.mouse.justPressed && mouseOverlaps(members[curSelected]) && !funkin.backend.system.Controls.instance.touchC)) curOption.select();
+				if (controls.ACCEPT) curOption.select();
 				if (curFloatOption != null) {
 					if (controls.LEFT) curFloatOption.changeValue(-elapsed);
 					if (controls.RIGHT) curFloatOption.changeValue(elapsed);
