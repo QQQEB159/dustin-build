@@ -35,7 +35,7 @@ class MobileOptions extends TreeMenuScreen
 			MusicBeatState.getState().removeTouchPad();
 			MusicBeatState.getState().addTouchPad("LEFT_FULL", "A_B");
 		}));
-		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0, 100, 5, "touchPadAlpha", (alpha:Int) ->
+		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0, 100, 5, "touchPadAlpha", (alpha:Float) ->
 		{
 			MusicBeatState.getState().touchPad.alpha = (alpha / 100);
 			if (funkin.backend.system.Controls.instance.touchC)
