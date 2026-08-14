@@ -4,6 +4,7 @@ import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFramesCollection;
 import funkin.backend.assets.ModsFolder;
+import funkin.backend.system.modules.FunkinCache;
 import funkin.backend.scripting.Script;
 import haxe.io.Path;
 import lime.utils.AssetLibrary;
@@ -21,6 +22,20 @@ class Paths
 		FlxG.signals.preStateSwitch.add(function() {
 			tempFramesCache.clear();
 		});
+	}
+	
+	public static function clearPlayStateTempCaches():Void {
+		tempFramesCache.clear();
+
+		if (FlxG.bitmap != null) {
+			FlxG.bitmap.clearCache();
+			FlxG.bitmap.clearUnused();
+		}
+
+		if (FunkinCache.instance != null)
+			FunkinCache.instance.clearSecondLayer();
+			
+		openfl.Assets.cache.clear("songs");
 	}
 
 	public static inline function getPath(file:String, ?library:String) {

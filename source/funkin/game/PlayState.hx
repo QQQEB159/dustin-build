@@ -19,6 +19,7 @@ import funkin.backend.chart.EventsData;
 import funkin.backend.scripting.DummyScript;
 import funkin.backend.scripting.Script;
 import funkin.backend.scripting.ScriptPack;
+import funkin.backend.utils.MemoryUtil;
 import funkin.backend.scripting.events.*;
 import funkin.backend.scripting.events.gameplay.*;
 import funkin.backend.scripting.events.note.*;
@@ -1098,6 +1099,9 @@ class PlayState extends MusicBeatState
 		SaveWarning.reset();
 
 		instance = null;
+		
+		Paths.clearPlayStateTempCaches();
+		MemoryUtil.clearMajor();
 		
 		qqqeb = false;
 
