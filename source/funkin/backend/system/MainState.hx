@@ -46,7 +46,7 @@ class MainState extends FlxState {
 		else
 		{
 			#if TOUCH_CONTROLS
-			mobile.funkin.backend.utils.MobileData.clearTouchPadData();
+			//mobile.funkin.backend.utils.MobileData.clearTouchPadData();
 			#end
 		}
 
